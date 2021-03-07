@@ -63,3 +63,6 @@ reboot```
 5. edit sudoers file : visudo
 	## Uncomment to allow members of group wheel to execute any command
 	%wheel ALL=(ALL) ALL
+## Addition Commands
+
+1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
