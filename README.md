@@ -16,9 +16,9 @@ btrfs subvolume create /mnt/snapshots
 umount -R /mnt <!-- unmount  /mnt to btrfs drive after creating subvolumes -->
 mkdir /mnt/home
 mkdir /mnt/.snapshots
-mount -t btrfs -o subvol=root,compress=zstd,ssd,noatime,autodefrag /dev/vda3 /mnt  <!-- mount sub volumes :- mounting root sub volume -->
-mount -t btrfs -o subvol=home,compress=zstd,ssd,noatime,autodefrag /dev/vda3 /mnt/home <!-- mount sub home :- mounting root sub volume -->
-mount -t btrfs -o subvol=snapshots,compress=zstd,ssd,noatime,autodefrag /dev/vda3 /mnt/.snapshots <!-- mount sub volumes :- snapshots root sub volume -->
+mount -t btrfs -o subvol=root,compress=zstd,ssd,noatime,autodefrag,rw /dev/vda3 /mnt  <!-- mount sub volumes :- mounting root sub volume -->
+mount -t btrfs -o subvol=home,compress=zstd,ssd,noatime,autodefrag,rw /dev/vda3 /mnt/home <!-- mount sub home :- mounting root sub volume -->
+mount -t btrfs -o subvol=snapshots,compress=zstd,ssd,noatime,autodefrag,rw /dev/vda3 /mnt/.snapshots <!-- mount sub volumes :- snapshots root sub volume -->
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet vim grub efibootmgr dhcpcd networkmanager openssh nmctl git  <!-- install base system-->
 genfstab -U /mnt >> /mnt/etc/fstab  <!-- generate fstal for auto mounting drives / subvolumes -->
 arch-chroot /mnt <!-- login to installed system -->
