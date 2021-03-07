@@ -1,12 +1,11 @@
-# Arch-install
 # Arch Installation with btrfs
 ## Partitions
-cfdisk
+`cfdisk`
 1. Parition number 1 : 512m , Type = EFI
 2. Partiton number 2 : 1G , Type = Linux Swap
 3. partiton number 3 : 20G , Type = Linux File System
 ## Formatting the partitons
-mkfs.fat -F32 /dev/vda1  <!-- making first partiton as fat 32 to mount to /boot/efi for uefi mode -->
+```mkfs.fat -F32 /dev/vda1  <!-- making first partiton as fat 32 to mount to /boot/efi for uefi mode -->
 mkswap /dev/vda2 <!-- making second partiton as swap -->
 swapon /dev/vda2 <!-- sayling system to start using this  partition for swap -->
 mkfs.btrfs /dev/vda3 <!-- formatting this partiton os btrfs and create subvolumes inside this -->
@@ -52,7 +51,7 @@ bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"
 
 exit
 umount -R /mnt
-reboot
+reboot```
 
 ## POST INSTALLATION
 1. install vi : pacman -S vi
