@@ -83,7 +83,7 @@ reboot
 
 ##### Refer below : 
 
-(MSI PER KEY RGB)[https://github.com/bksinha4497/msi-perkeyrgb]
+[MSI PER KEY RGB](https://github.com/bksinha4497/msi-perkeyrgb)
 
 
 ## How to install NVIDIA video driver on Arch Linux 
