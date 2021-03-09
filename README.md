@@ -26,21 +26,21 @@ arch-chroot /mnt <!-- login to installed system -->
 ```
 ## Base system is installed now we set time zone , keyboard layout , hostname and hosts
 ```
-ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-hwclock --systohc
-vim /etc/locale.gen
+ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  <!-- Setting time zone -->
+hwclock --systohc <!-- sync harware clock to our timezone -->
+vim /etc/locale.gen <!-- add lang to locale -->
 LANG=en_US.UTF-8
-locale-gen
+locale-gen <!- generate added locale -->
 echo LANG=en_US.UTF-8 > /etc/locale.conf
-echo arch > /etc/hostname
-vim /etc/hosts
+echo arch > /etc/hostname <!-- Set hostname -->
+vim /etc/hosts <!-- set local ip -->
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	arch.localdomain	arch
-passwd
-mkinitcpio -P
-systemctl enable NetworkManager
-systemctl enable dhcpcd
+passwd <!-- Set root password -->
+mkinitcpio -P <!-- Creating a new initramfs is usually not required, because mkinitcpio was run on installation of the kernel package with pacstrap -->
+systemctl enable NetworkManager <!-- enable networking -->
+systemctl enable dhcpcd <!-- enable internet access -->
 ```
 ## Setup boot manager with grub
 ```
