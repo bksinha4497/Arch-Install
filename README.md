@@ -66,3 +66,34 @@ reboot```
 ## Addition Commands
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
+
+## GNOME with Arch
+
+`pacman -S wayland gnome gnome-extras xf86-video-intel`
+
+## How to install NVIDIA video driver on Arch Linux 
+
+`	
+sudo pacman -S nvidia cuda nvidia-settings`
+
+## How to install and use Bumblebee (how to enable NVIDIA Optimus on Arch Linux)
+
+```
+sudo pacman -S bumblebee virtualgl bbswitch acpid mesa
+sudo systemctl enable bumblebeed.service
+sudo systemctl enable acpid.service
+sudo usermod -a -G bumblebee $USER
+```
+
+## System freezes after installing Bumblebee
+
+`lspci -k`
+
+If the system freezes completely, reboot and remove the bbswitch package.
+
+`sudo pacman -R bbswitch`
+
+## How to use Bumblebee / NVIDIA Optimus on Linux
+
+`optirun PROGRAM`
+
