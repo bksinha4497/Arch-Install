@@ -79,6 +79,13 @@ reboot
 
 `pacman -S wayland gnome gnome-extras xf86-video-intel`
 
+## For Keyboard to have lighting
+
+###### Refer below : 
+```
+https://github.com/bksinha4497/msi-perkeyrgb
+```
+
 ## How to install NVIDIA video driver on Arch Linux 
 
 `sudo pacman -S nvidia cuda nvidia-settings`
