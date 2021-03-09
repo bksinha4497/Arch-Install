@@ -81,10 +81,10 @@ reboot
 
 ## For Keyboard to have lighting
 
-###### Refer below : 
-```
-https://github.com/bksinha4497/msi-perkeyrgb
-```
+##### Refer below : 
+
+(MSI PER KEY RGB)[https://github.com/bksinha4497/msi-perkeyrgb]
+
 
 ## How to install NVIDIA video driver on Arch Linux 
 
