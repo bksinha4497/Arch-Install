@@ -97,3 +97,28 @@ If the system freezes completely, reboot and remove the bbswitch package.
 
 `optirun PROGRAM`
 
+## Pacman hook
+###### To avoid the possibility of forgetting to update initramfs after an NVIDIA driver upgrade, you may want to use a pacman hook:
+
+`vim /etc/pacman.d/hooks/nvidia.hook`
+
+```
+
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=linux-zen
+# Change the linux-zen part above and in the Exec line if a different kernel is used
+# Make sure the Target package set in this hook is the one you've installed in steps above (e.g. nvidia, nvidia-dkms, nvidia-lts or nvidia-ck-something).
+
+[Action]
+Description=Update Nvidia module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+```
+
