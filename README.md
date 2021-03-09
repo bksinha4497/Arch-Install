@@ -5,7 +5,8 @@
 2. Partiton number 2 : 1G , Type = Linux Swap
 3. partiton number 3 : 20G , Type = Linux File System
 ## Formatting the partitons
-```mkfs.fat -F32 /dev/vda1  <!-- making first partiton as fat 32 to mount to /boot/efi for uefi mode -->
+```
+mkfs.fat -F32 /dev/vda1`  <!-- making first partiton as fat 32 to mount to /boot/efi for uefi mode -->
 mkswap /dev/vda2 <!-- making second partiton as swap -->
 swapon /dev/vda2 <!-- sayling system to start using this  partition for swap -->
 mkfs.btrfs /dev/vda3 <!-- formatting this partiton os btrfs and create subvolumes inside this -->
@@ -22,6 +23,9 @@ mount -t btrfs -o subvol=snapshots,compress=zstd,ssd,noatime,autodefrag,rw,space
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet vim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget <!-- install base system-->
 genfstab -U /mnt >> /mnt/etc/fstab  <!-- generate fstal for auto mounting drives / subvolumes -->
 arch-chroot /mnt <!-- login to installed system -->
+```
+## Base system is installed now we set time zone , keyboard layout , hostname and hosts
+```
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 hwclock --systohc
 vim /etc/locale.gen
@@ -37,10 +41,14 @@ passwd
 mkinitcpio -P
 systemctl enable NetworkManager
 systemctl enable dhcpcd
+```
+## Setup boot manager with grub
+```
 mkdir /boot/efi
 mount /dev/vda1 /boot/efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  <!-- install bootloader and configure-->
 grub-mkconfig -o /boot/grub/grub.cfg
+```
 
 ## additional important step  UEFI bootloader (Mainly to run in vm)
 <!-- if EFI partiton is mounted at /boot/efi -->
@@ -51,7 +59,7 @@ bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"
 
 exit
 umount -R /mnt
-reboot```
+reboot
 
 ## POST INSTALLATION
 1. install vi : pacman -S vi
@@ -73,8 +81,7 @@ reboot```
 
 ## How to install NVIDIA video driver on Arch Linux 
 
-`	
-sudo pacman -S nvidia cuda nvidia-settings`
+`sudo pacman -S nvidia cuda nvidia-settings`
 
 ## How to install and use Bumblebee (how to enable NVIDIA Optimus on Arch Linux)
 
@@ -101,9 +108,7 @@ If the system freezes completely, reboot and remove the bbswitch package.
 ###### To avoid the possibility of forgetting to update initramfs after an NVIDIA driver upgrade, you may want to use a pacman hook:
 
 `vim /etc/pacman.d/hooks/nvidia.hook`
-
 ```
-
 [Trigger]
 Operation=Install
 Operation=Upgrade
@@ -121,4 +126,3 @@ When=PostTransaction
 NeedsTargets
 Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 ```
-
