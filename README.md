@@ -75,8 +75,8 @@ reboot
 	useradd -G wheel,power,audio,video -m bksinha4497
 	passwd bksinha4497
 5. edit sudoers file : visudo
-	## Uncomment to allow members of group wheel to execute any command
-x		%wheel ALL=(ALL) ALL
+## Uncomment to allow members of group wheel to execute any command
+`%wheel ALL=(ALL) ALL`
 ## Addition Commands
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
