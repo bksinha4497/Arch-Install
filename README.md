@@ -20,7 +20,7 @@ mkdir /mnt/.snapshots
 mount -t btrfs -o subvol=@,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt  
 mount -t btrfs -o subvol=@home,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/home 
 mount -t btrfs -o subvol=@snapshots,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/.snapshots 
-pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet vim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget 
+pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet nvim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget firewalld 
 genfstab -U /mnt >> /mnt/etc/fstab  
 arch-chroot /mnt 
 ```
@@ -28,20 +28,20 @@ arch-chroot /mnt
 ```
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
 hwclock --systohc 
-vim /etc/locale.gen 
-LANG=en_US.UTF-8
+echo "LANG=en_US.UTF-8" >>/etc/locale.gen 
 locale-gen 
-echo LANG=en_US.UTF-8 > /etc/locale.conf
-echo arch > /etc/hostname 
-vim /etc/hosts 
-127.0.0.1	localhost
-::1		localhost
-127.0.1.1	arch.localdomain	arch
-passwd 
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "arch" >> /etc/hostname 
+echo "127.0.0.1	localhost" >>etc/hosts
+echo "::1	localhost" >>etc/hosts
+echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
+echo root:password | chpasswd 
 mkinitcpio -P 
 systemctl enable NetworkManager 
-systemctl enable dhcpcd 
+systemctl enable dhcpcd
+systemctl enable firewalld
 ```
+
 ## Setup boot manager with grub
 ```
 mkdir /boot/efi
@@ -52,6 +52,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ## additional important step  UEFI bootloader (Mainly to run in vm)
 ##### if EFI partiton is mounted at /boot/efi
+```
 mkdir /boot/efi/EFI/BOOT
 cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
 vim /boot/efi/startup.nsh
@@ -60,6 +61,7 @@ bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"
 exit
 umount -R /mnt
 reboot
+```
 
 ## POST INSTALLATION
 1. install vi : pacman -S vi
@@ -70,7 +72,7 @@ reboot
 	passwd bksinha4497
 5. edit sudoers file : visudo
 	## Uncomment to allow members of group wheel to execute any command
-	%wheel ALL=(ALL) ALL
+x		%wheel ALL=(ALL) ALL
 ## Addition Commands
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
