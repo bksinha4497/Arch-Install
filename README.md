@@ -30,7 +30,7 @@ ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 hwclock --systohc 
 vim /etc/locale.gen 
 LANG=en_US.UTF-8
-locale-gen <!- generate added locale -->
+locale-gen 
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo arch > /etc/hostname 
 vim /etc/hosts 
