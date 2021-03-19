@@ -20,10 +20,14 @@ mkdir /mnt/.snapshots
 mount -t btrfs -o subvol=@,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt  
 mount -t btrfs -o subvol=@home,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/home 
 mount -t btrfs -o subvol=@snapshots,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/.snapshots 
+```
+## Install base system
+```
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet nvim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget firewalld 
 genfstab -U /mnt >> /mnt/etc/fstab  
-arch-chroot /mnt 
+arch-chroot /mnt
 ```
+
 ## Base system is installed now we set time zone , keyboard layout , hostname and hosts
 ```
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
