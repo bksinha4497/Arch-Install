@@ -22,11 +22,11 @@ echo "Formatting EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 echo "Setting up swap"
-mkswap -L swap 
+mkswap -L swap /dev/disk/by-partlabel/swap
 swapon -L swap
 
 echo "Creating and mounting BTRFS subvolumes"
-mkfs.btrfs --force --label system 
+mkfs.btrfs --force --label system /dev/disk/by-partlabel/system
 mount -t btrfs LABEL=system /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
