@@ -23,7 +23,7 @@ mount -t btrfs -o subvol=@snapshots,compress=zstd,ssd,noatime,autodefrag,rw,spac
 ```
 ## Install base system
 ```
-pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet nvim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget firewalld 
+pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
 genfstab -U /mnt >> /mnt/etc/fstab  
 arch-chroot /mnt
 ```
@@ -39,7 +39,12 @@ echo "arch" >> /etc/hostname
 echo "127.0.0.1	localhost" >>etc/hosts
 echo "::1	localhost" >>etc/hosts
 echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
-echo root:password | chpasswd 
+echo root:password | chpasswd
+pacman -S --no-confirm wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet nvim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget firewalld vim
+
+#pacman -S --no-confirm nvidia nvidia-settings nvidia-utils
+#pacman -S --no-confirm nvidia xf86-video-amdgpu
+
 mkinitcpio -P 
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
@@ -68,10 +73,9 @@ reboot
 ```
 
 ## POST INSTALLATION
-1. install vi : pacman -S vi
-2. instll / update sudo :  pacman --sync sudo
-3. enable multilib : vim /etc/pacman.conf
-4. Add users
+1. install / update sudo :  pacman --sync sudo
+2. enable multilib : vim /etc/pacman.conf
+3. Add users
 	useradd -G wheel,power,audio,video -m bksinha4497
 	passwd bksinha4497
 5. edit sudoers file : visudo
@@ -83,18 +87,13 @@ reboot
 
 ## GNOME with Arch
 
-`pacman -S wayland gnome gnome-extras xf86-video-intel`
+`pacman -S wayland gnome gnome-extras xf86-video-intel
 
 ## For Keyboard to have lighting
 
 ##### Refer below : 
 
 [MSI PER KEY RGB](https://github.com/bksinha4497/msi-perkeyrgb)
-
-
-## How to install NVIDIA video driver on Arch Linux 
-
-`sudo pacman -S nvidia cuda nvidia-settings`
 
 ## How to install and use Bumblebee (how to enable NVIDIA Optimus on Arch Linux)
 
