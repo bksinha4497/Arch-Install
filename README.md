@@ -20,10 +20,14 @@ mkdir /mnt/.snapshots
 mount -t btrfs -o subvol=@,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt  
 mount -t btrfs -o subvol=@home,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/home 
 mount -t btrfs -o subvol=@snapshots,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/.snapshots 
-pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet nvim grub efibootmgr dhcpcd networkmanager openssh nmctl git wget firewalld 
-genfstab -U /mnt >> /mnt/etc/fstab  
-arch-chroot /mnt 
 ```
+## Install base system
+```
+pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
+genfstab -U /mnt >> /mnt/etc/fstab  
+arch-chroot /mnt
+```
+
 ## Base system is installed now we set time zone , keyboard layout , hostname and hosts
 ```
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
@@ -35,11 +39,24 @@ echo "arch" >> /etc/hostname
 echo "127.0.0.1	localhost" >>etc/hosts
 echo "::1	localhost" >>etc/hosts
 echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
-echo root:password | chpasswd 
+echo root:password | chpasswd
+pacman -S --no-confirm bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh nmctl git wget firewalld vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq nvim grub efibootmgr
+
+#pacman -S --no-confirm nvidia nvidia-settings nvidia-utils
+#pacman -S --no-confirm nvidia xf86-video-amdgpu
+
 mkinitcpio -P 
+
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
 systemctl enable firewalld
+systemctl enable sshd
+systemctl enable bluetooth
+systemctl enable libvirtd
+systemctl enable avahi-daemon
+systemctl enable tlp
+systemctl enable reflector.timer
+systemctl enable acpid
 ```
 
 ## Setup boot manager with grub
@@ -55,8 +72,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 mkdir /boot/efi/EFI/BOOT
 cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
-vim /boot/efi/startup.nsh
-bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"
+echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
 
 exit
 umount -R /mnt
@@ -64,33 +80,27 @@ reboot
 ```
 
 ## POST INSTALLATION
-1. install vi : pacman -S vi
-2. instll / update sudo :  pacman --sync sudo
-3. enable multilib : vim /etc/pacman.conf
-4. Add users
+1. install / update sudo :  pacman --sync sudo
+2. enable multilib : vim /etc/pacman.conf
+3. Add users
 	useradd -G wheel,power,audio,video -m bksinha4497
 	passwd bksinha4497
 5. edit sudoers file : visudo
-	## Uncomment to allow members of group wheel to execute any command
-x		%wheel ALL=(ALL) ALL
+## Uncomment to allow members of group wheel to execute any command
+`%wheel ALL=(ALL) ALL`
 ## Addition Commands
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
 
 ## GNOME with Arch
 
-`pacman -S wayland gnome gnome-extras xf86-video-intel`
+`pacman -S wayland gnome gnome-extras xf86-video-intel
 
 ## For Keyboard to have lighting
 
 ##### Refer below : 
 
 [MSI PER KEY RGB](https://github.com/bksinha4497/msi-perkeyrgb)
-
-
-## How to install NVIDIA video driver on Arch Linux 
-
-`sudo pacman -S nvidia cuda nvidia-settings`
 
 ## How to install and use Bumblebee (how to enable NVIDIA Optimus on Arch Linux)
 
