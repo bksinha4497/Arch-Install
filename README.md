@@ -64,8 +64,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 mkdir /boot/efi/EFI/BOOT
 cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
-vim /boot/efi/startup.nsh
-bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"
+echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
 
 exit
 umount -R /mnt
