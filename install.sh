@@ -16,10 +16,10 @@ echo "Wiping drive $DRIVE"
 sgdisk --zap-all $DRIVE
 
 echo "Partitioning drive with partition labels"
-sgdisk --clear --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:EFI --new=2:0:+"$swap_size"GiB --typecode=2:8200 --change-name=2:swap --new=3:0:0 --typecode=3:8300 --change-name=3:system $DRIVE
+sgdisk --clear --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:efi --new=2:0:+"$swap_size"GiB --typecode=2:8200 --change-name=2:swap --new=3:0:0 --typecode=3:8300 --change-name=3:system $DRIVE
 
 echo "Formatting EFI partition"
-mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
+mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/efi
 
 echo "Setting up swap"
 mkswap -L swap /dev/disk/by-partlabel/swap
