@@ -71,6 +71,7 @@ systemctl enable reflector.timer
 systemctl enable acpid
 
 useradd -G wheel,power,audio,video -m bksinha4497
+usermod -aG libvirt bksinha4497
 echo bksinha4497:password | chpasswd
 
 exit
