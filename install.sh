@@ -73,6 +73,7 @@ systemctl enable acpid
 
 useradd -G wheel,power,audio,video -m bksinha4497
 usermod -aG libvirt bksinha4497
+sed -i '/82/s/.//' /etc/sudoers
 echo bksinha4497:password | chpasswd
 
 exit
