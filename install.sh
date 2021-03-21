@@ -10,6 +10,7 @@ else
  DRIVE=/dev/vda
 fi
 
+swap_size="1"
 
 echo "Wiping drive $DRIVE"
 sgdisk --zap-all $DRIVE
