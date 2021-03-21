@@ -27,7 +27,7 @@ swapon -L swap
 
 echo "Creating and mounting BTRFS subvolumes"
 mkfs.btrfs --force --label system /dev/mapper/system
-mount -t btrfs /dev/mapper/system /mnt
+mount -t btrfs LABEL=system /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
@@ -36,9 +36,9 @@ mkdir /mnt/home
 mkdir /mnt/.snapshots
 o=defaults,x-mount.mkdir
 o_btrfs=$o,compress=zstd,ssd,noatime,autodefrag,rw,space_cache
-mount -t btrfs -o subvol=@,$o_btrfs /dev/mapper/system /mnt  
-mount -t btrfs -o subvol=@home,$o_btrfs /dev/mapper/system /mnt/home 
-mount -t btrfs -o subvol=@snapshots,$o_btrfs /dev/mapper/system /mnt/.snapshots 
+mount -t btrfs -o subvol=@,$o_btrfs LABEL=system /mnt  
+mount -t btrfs -o subvol=@home,$o_btrfs LABEL=system /mnt/home 
+mount -t btrfs -o subvol=@snapshots,$o_btrfs LABEL=system /mnt/.snapshots 
 
 echo "installing arch base"
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
