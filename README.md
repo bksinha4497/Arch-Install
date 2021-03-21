@@ -46,9 +46,17 @@ pacman -S --no-confirm bridge-utils wpa_supplicant wireless_tools networkmanager
 #pacman -S --no-confirm nvidia xf86-video-amdgpu
 
 mkinitcpio -P 
+
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
 systemctl enable firewalld
+systemctl enable sshd
+systemctl enable bluetooth
+systemctl enable libvirtd
+systemctl enable avahi-daemon
+systemctl enable tlp
+systemctl enable reflector.timer
+systemctl enable acpid
 ```
 
 ## Setup boot manager with grub
