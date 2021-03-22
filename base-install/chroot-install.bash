@@ -13,7 +13,7 @@ echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget firewalld vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr
+pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget firewalld vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr acpid
 
 echo "Generating initramfs"
 mkinitcpio -P 
