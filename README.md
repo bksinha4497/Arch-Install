@@ -4,90 +4,13 @@
 1. Parition number 1 : 512m , Type = EFI
 2. Partiton number 2 : 1G , Type = Linux Swap
 3. partiton number 3 : 20G , Type = Linux File System
-## Formatting the partitons
-```
-mkfs.fat -F32 /dev/vda1`  
-mkswap /dev/vda2 
-swapon /dev/vda2 
-mkfs.btrfs /dev/vda3 
-mount -t btrfs /dev/vda3 /mnt 
-btrfs subvolume create /mnt/@
-btrfs subvolume create /mnt/@home
-btrfs subvolume create /mnt/@snapshots
-umount -R /mnt 
-mkdir /mnt/home
-mkdir /mnt/.snapshots
-mount -t btrfs -o subvol=@,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt  
-mount -t btrfs -o subvol=@home,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/home 
-mount -t btrfs -o subvol=@snapshots,compress=zstd,ssd,noatime,autodefrag,rw,space_cache /dev/vda3 /mnt/.snapshots 
-```
+
 ## Install base system
-```
-pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
-genfstab -U /mnt >> /mnt/etc/fstab  
-arch-chroot /mnt
-```
+1. Clone this repo into your arch iso suing `git clone https://github.com/bksinha4497/Arch-Install'
+2. CD into the directory `cd Arch-Install`
+3. Make the scripts executable using `chmod +X base-install.bash chroot-install.bash'
+4. Execute the script to start installation using `./base-isntall.bash"
 
-## Base system is installed now we set time zone , keyboard layout , hostname and hosts
-```
-ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
-hwclock --systohc 
-echo "LANG=en_US.UTF-8" >>/etc/locale.gen 
-locale-gen 
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo "arch" >> /etc/hostname 
-echo "127.0.0.1	localhost" >>etc/hosts
-echo "::1	localhost" >>etc/hosts
-echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
-echo root:password | chpasswd
-pacman -S --no-confirm bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh nmctl git wget firewalld vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq nvim grub efibootmgr
-
-#pacman -S --no-confirm nvidia nvidia-settings nvidia-utils
-#pacman -S --no-confirm nvidia xf86-video-amdgpu
-
-mkinitcpio -P 
-
-systemctl enable NetworkManager 
-systemctl enable dhcpcd
-systemctl enable firewalld
-systemctl enable sshd
-systemctl enable bluetooth
-systemctl enable libvirtd
-systemctl enable avahi-daemon
-systemctl enable tlp
-systemctl enable reflector.timer
-systemctl enable acpid
-```
-
-## Setup boot manager with grub
-```
-mkdir /boot/efi
-mount /dev/vda1 /boot/efi
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-## additional important step  UEFI bootloader (Mainly to run in vm)
-##### if EFI partiton is mounted at /boot/efi
-```
-mkdir /boot/efi/EFI/BOOT
-cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
-echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
-
-exit
-umount -R /mnt
-reboot
-```
-
-## POST INSTALLATION
-1. install / update sudo :  pacman --sync sudo
-2. enable multilib : vim /etc/pacman.conf
-3. Add users
-	useradd -G wheel,power,audio,video -m bksinha4497
-	passwd bksinha4497
-5. edit sudoers file : visudo
-## Uncomment to allow members of group wheel to execute any command
-`%wheel ALL=(ALL) ALL`
 ## Addition Commands
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
