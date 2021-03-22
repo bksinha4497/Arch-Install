@@ -1,3 +1,4 @@
+#! /bin/bash
 
 echo "Chrooted into Arch and Settin up base system"
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
