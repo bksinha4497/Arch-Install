@@ -68,7 +68,7 @@ mkinitcpio -P
 
 echo "Making /boot/efi and mounting EFI partition"
 mkdir /boot/efi
-mount LABEL=EFI /boot/efii
+mount LABEL=EFI /boot/efi
 
 echo "Installing Grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  
