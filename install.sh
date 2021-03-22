@@ -45,7 +45,7 @@ mount -t btrfs -o subvol=@snapshots,$o_btrfs LABEL=system /mnt/.snapshots
 echo "installing arch base"
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
 genfstab -U /mnt >> /mnt/etc/fstab  
-arch-chroot /mnt << EOF
+arch-chroot /mnt <<"EOT"
 
 echo "Chrooted into Arch and Settin up base system"
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
