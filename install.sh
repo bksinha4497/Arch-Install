@@ -96,7 +96,7 @@ usermod -aG libvirt bksinha4497
 sed -i '/82/s/.//' /etc/sudoers
 echo bksinha4497:password | chpasswd
 
-echo "Exiting and revbooting in 5...4...3..2..1."
+echo "Exiting and rebooting in 5...4...3..2..1."
 sleep 5s
 exit
 umount -R /mnt
