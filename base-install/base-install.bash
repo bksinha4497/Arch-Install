@@ -47,6 +47,6 @@ pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel
 genfstab -U /mnt >> /mnt/etc/fstab  
 
 echo "chrooting into arch installed system"
-cp ~/Arch-Install/chroot-install.bash /mnt/@/
+cp ~/Arch-Install/base-install/chroot-install.bash /mnt/@/
 chmod +X /mnt/@/chroot-install.bash
 arch-chroot /mnt ./@/chroot-install.bash
