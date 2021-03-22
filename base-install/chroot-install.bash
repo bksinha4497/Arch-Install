@@ -52,5 +52,3 @@ echo bksinha4497:password | chpasswd
 echo "Exiting and rebooting in 5...4...3..2..1."
 sleep 5s
 exit
-umount -R /mnt
-reboot
