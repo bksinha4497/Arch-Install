@@ -48,8 +48,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "chrooting into arch installed system"
 cp ~/Arch-Install/base-install/chroot-install.bash /mnt/@/
-chmod +X /mnt/@/chroot-install.bash
+chmod u+x /mnt/@/chroot-install.bash
 arch-chroot /mnt ./@/chroot-install.bash
 
 umount -R /mnt
-reboot
+echo "You can now reboot the machine"
+#reboot
