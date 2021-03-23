@@ -3,7 +3,7 @@
 gnome_install() {
   echo "Installing Gnome"
   sudo pacman -S --noconfirm xorg gdm gnome gnome-extra gnome-tweaks firefox vlc
-  sudo systemctl enable gdmi
+  sudo systemctl enable gdm
   echo "Installation complete , you can reboot now"
 }
 
