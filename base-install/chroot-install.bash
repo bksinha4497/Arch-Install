@@ -49,9 +49,10 @@ pacman --sync sudo
 echo "Adding user bksinhs4497 with default root and user password as password"
 useradd -G wheel,power,audio,video -m bksinha4497
 usermod -aG libvirt bksinha4497
-sed -e '0,/# %wheel/s// %wheel/' /etc/sudoers
+sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo bksinha4497:password | chpasswd
 
-echo "Exiting and rebooting in 5...4...3..2..1."
-sleep 5s
+sleep 1s
+echo "Exiting out of chroot"
+sleep 1s
 exit
