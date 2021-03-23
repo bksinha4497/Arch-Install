@@ -3,13 +3,19 @@
 echo "Chrooted into Arch and Settin up base system"
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
 hwclock --systohc 
-echo "en_US.UTF-8" >> /etc/locale.conf
-echo "en_IN UTF-8" >> /etc/locale.conf
-locale-gen 
+
+echo "Setting locales"
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+locale-gen
+
+echo "Setting hosts and hostname"
 echo "arch" >> /etc/hostname 
 echo "127.0.0.1	localhost" >>etc/hosts
 echo "::1	localhost" >>etc/hosts
 echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
+
+echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
