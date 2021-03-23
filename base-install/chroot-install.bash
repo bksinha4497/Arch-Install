@@ -21,6 +21,12 @@ echo root:password | chpasswd
 echo "Installing lot of softwares"
 pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget ufw vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr acpid
 
+# Insall Nvidia Drivers
+# pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+
+# Install Optimus for hybrid graphics 
+# pacman -S optimus-manager
+
 echo "Generating initramfs"
 mkinitcpio -P 
 
