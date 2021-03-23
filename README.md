@@ -11,7 +11,7 @@
 3. Make the scripts executable using `chmod u+x base-install.bash chroot-install.bash`
 4. To install nvidia drivers uncomment lines below # Nvidia 
   [Arch-Nvidia](https://wiki.archlinux.org/index.php/NVIDIA#Installation)
-5. Optionally you can install Optimus to manager hybrid graphics by uncommenting lines below # Install Optimus 
+5. Optionally you can install Optimus-Manager to manage hybrid graphics by uncommenting lines below # Install Optimus 
   [Optimus-Manager](https://github.com/Askannz/optimus-manager)
 6. Default users are root and biswajit and password is "password" 
 7. You can edit chroot-install.bash and at the end of the file change the user name and password as per you need.
