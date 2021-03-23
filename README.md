@@ -26,32 +26,11 @@
 
 `pacman -S wayland gnome gnome-extras xf86-video-intel
 
-## For Keyboard to have lighting
+## For MSI laptp keyboard to have lighting
 
 ##### Refer below : 
 
 [MSI PER KEY RGB](https://github.com/bksinha4497/msi-perkeyrgb)
-
-## How to install and use Bumblebee (how to enable NVIDIA Optimus on Arch Linux)
-
-```
-sudo pacman -S bumblebee virtualgl bbswitch acpid mesa
-sudo systemctl enable bumblebeed.service
-sudo systemctl enable acpid.service
-sudo usermod -a -G bumblebee $USER
-```
-
-## System freezes after installing Bumblebee
-
-`lspci -k`
-
-If the system freezes completely, reboot and remove the bbswitch package.
-
-`sudo pacman -R bbswitch`
-
-## How to use Bumblebee / NVIDIA Optimus on Linux
-
-`optirun PROGRAM`
 
 ## Pacman hook
 ###### To avoid the possibility of forgetting to update initramfs after an NVIDIA driver upgrade, you may want to use a pacman hook:
