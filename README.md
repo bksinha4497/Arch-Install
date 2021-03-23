@@ -23,10 +23,6 @@
 
 1. Check system running on wayland or xorg : echo $XDG_SESSION_TYPE
 
-## GNOME with Arch
-
-`pacman -S wayland gnome gnome-extras xf86-video-intel
-
 ## For MSI laptops keyboard to have lighting
 
 ##### Refer below : 
