@@ -19,7 +19,7 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget firewalld vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr acpid
+pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget ufw vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr acpid
 
 echo "Generating initramfs"
 mkinitcpio -P 
@@ -40,7 +40,7 @@ echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/s
 echo "Enabelling services to start on boot"
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
-systemctl enable firewalld
+systemctl enable ufw
 systemctl enable sshd
 systemctl enable bluetooth
 systemctl enable libvirtd
