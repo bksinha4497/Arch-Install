@@ -6,10 +6,13 @@
 3. partiton number 3 : 20G , Type = Linux File System
 
 ## Install base system
-1. Clone this repo into your arch iso suing `git clone https://github.com/bksinha4497/Arch-Install'
+1. Clone this repo into your booted arch iso using `git clone https://github.com/bksinha4497/Arch-Install'
 2. CD into the directory `cd Arch-Install`
-3. Make the scripts executable using `chmod u+x base-install.bash chroot-install.bash`
-4. Execute the script to start installation using `./base-install.bash`
+3. Make the scripts executable using `chmod u+x base-install.bash chroot-install.bash chroot-install.bash`
+4. default users are root and biswajit and password is "password" 
+5. You can edit chroot-install.bash and at the end change the user name and password as per you need.
+6. Execute the script to start installation using `./base-install.bash`
+7. After Installation you can reboot use the system as it as a Arch Server or you can choose to install kde desktop or gnome desktop via script
 
 ## Addition Commands
 
