@@ -27,7 +27,7 @@
 
 `pacman -S wayland gnome gnome-extras xf86-video-intel
 
-## For MSI laptp keyboard to have lighting
+## For MSI laptops keyboard to have lighting
 
 ##### Refer below : 
 
