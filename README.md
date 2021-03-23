@@ -17,6 +17,7 @@
 7. You can edit chroot-install.bash and at the end change the user name and password as per you need.
 8. Execute the script to start installation using `./base-install.bash`
 9. After Installation you can reboot use the system as it as a Arch Server or you can choose to install kde desktop or gnome desktop via script
+  [desktop-env-install.bash](https://github.com/bksinha4497/Arch-Install/blob/main/desktop-env-install.bash)
 
 ## Addition Commands
 
