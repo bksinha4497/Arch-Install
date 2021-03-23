@@ -27,7 +27,7 @@ echo "Setting up swap"
 mkswap -L swap /dev/disk/by-partlabel/swap
 swapon -L swap
 
-echo "Creating and mounting BTRFS subvolumes"
+echo "Creating  subvolumes"
 mkfs.btrfs --force --label system /dev/disk/by-partlabel/system
 mount -t btrfs LABEL=system /mnt
 btrfs subvolume create /mnt/@
@@ -36,6 +36,8 @@ btrfs subvolume create /mnt/@snapshots
 umount -R /mnt
 mkdir /mnt/home
 mkdir /mnt/.snapshots
+
+echo "Mounting BTRFS subvolumes"
 o=defaults,x-mount.mkdir
 o_btrfs=$o,compress=zstd,ssd,noatime,autodefrag,rw,space_cache
 mount -t btrfs -o subvol=@,$o_btrfs LABEL=system /mnt  
