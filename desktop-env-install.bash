@@ -28,9 +28,9 @@ incorrect_selection() {
 until [ "$selection" = "0" ]; do
   clear
   echo ""
-  echo "    	1  -  Install Gnome 1"
+  echo "    	1  -  Install Gnome"
   echo "    	2  -  Install Kde"
-  echo "        3  -  Reboot"
+  echo "      3  -  Reboot"
   echo "    	0  -  Exit"
   echo ""
   echo -n "  Enter selection: "
