@@ -52,11 +52,11 @@ systemctl enable acpid
 echo "Updating sudo" 
 pacman --sync sudo
 
-echo "Adding user bksinhs4497 with default root and user password as password"
+echo "Adding user "biswajit" with default root and user password as password"
 useradd -G wheel,power,audio,video -m bksinha4497
-usermod -aG libvirt bksinha4497
+usermod -aG libvirt biswajit
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
-echo bksinha4497:password | chpasswd
+echo biswajit:password | chpasswd
 
 sleep 1s
 echo "Exiting out of chroot"
