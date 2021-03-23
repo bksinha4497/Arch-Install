@@ -1,9 +1,9 @@
 # Arch Installation with btrfs
 ## Partitions
 `Simple Setup for Virtual Machine`
-1. Parition number 1 : 512m , Type = EFI
-2. Partiton number 2 : 1G , Type = Linux Swap
-3. partiton number 3 : 20G , Type = Linux File System
+1. Parition number 1 : 512M , Type = EFI
+2. Partiton number 2 : 1G   , Type = Linux Swap
+3. partiton number 3 : 20G  , Type = Linux File System
 
 ## Install base system
 1. Clone this repo into your booted arch iso using `git clone https://github.com/bksinha4497/Arch-Install`
