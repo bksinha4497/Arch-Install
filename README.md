@@ -7,7 +7,7 @@
 
 ## Install base system
 1. Clone this repo into your booted arch iso using `git clone https://github.com/bksinha4497/Arch-Install`
-2. CD into the directory `cd Arch-Install`
+2. CD into the directory `cd Arch-Install/base-install`
 3. Make the scripts executable using `chmod u+x base-install.bash chroot-install.bash`
 4. To install nvidia drivers uncomment lines below # Nvidia 
   [Arch-Nvidia](https://wiki.archlinux.org/index.php/NVIDIA#Installation)
