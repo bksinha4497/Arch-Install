@@ -51,6 +51,7 @@ umount -R /mnt
 mkdir /mnt/home
 mkdir /mnt/root
 mkdir /mnt/srv
+mkdir /mnt/var
 mkdir /mnt/var/cache
 mkdir /mnt/var/log
 mkdir /mnt/var/tmp
