@@ -67,7 +67,10 @@ mount -t btrfs -o subvol=@cache,$o_btrfs LABEL=system /mnt/var/cache
 mount -t btrfs -o subvol=@log,$o_btrfs LABEL=system /mnt/var/log 
 mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp 
 
-echo "installing arch base"
+echo "Mounted volumes on /mnt"
+mount | grep /mnt
+
+echo "Installing arch base"
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
 genfstab -U /mnt >> /mnt/etc/fstab  
 
