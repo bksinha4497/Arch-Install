@@ -59,7 +59,7 @@ systemctl enable reflector.timer
 systemctl enable acpid
 
 echo "Updating sudo" 
-pacman --sync sudo
+pacman --noconfirm --sync sudo
 
 echo "Adding user \"biswajit\" with default root and user password as password"
 usermod -aG wheel,power,audio,video,libvirt biswajit
