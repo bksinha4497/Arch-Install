@@ -72,6 +72,7 @@ mount | grep /mnt
 
 echo "Installing arch base"
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
+echo "Generating fstab"
 genfstab -U /mnt >> /mnt/etc/fstab  
 
 echo "chrooting into arch installed system"
