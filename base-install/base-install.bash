@@ -72,15 +72,10 @@ mount | grep /mnt
 
 sleep 3s
 
-echo "installing arch base"
-||||||| 9e3bab1
-echo "installing arch base"
-=======
 echo "Mounted volumes on /mnt"
 mount | grep /mnt
 
 echo "Installing arch base"
->>>>>>> 7ac61650fa34eeac7ec6e7aafa13d9f559e4b952
 pacstrap /mnt base linux-zen linux-firmware intel-ucode base-devel 
 echo "Generating fstab"
 genfstab -U /mnt >> /mnt/etc/fstab  
