@@ -86,5 +86,11 @@ chmod u+x /mnt/@/chroot-install.bash
 arch-chroot /mnt ./@/chroot-install.bash
 
 umount -R /mnt
-echo "You can now reboot the machine"
+
+if mount | grep /mnt > /dev/null; then
+    echo "Please unmount /mnt using :: unmount -R /mnt and reboot"
+else
+    echo "You can now reboot the machine"
+fi
+
 #reboot
