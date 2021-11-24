@@ -49,14 +49,10 @@ echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/s
 echo "Enabelling services to start on boot"
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
-systemctl enable ufw
 systemctl enable sshd
 systemctl enable bluetooth
 systemctl enable libvirtd
-systemctl enable avahi-daemon
-systemctl enable tlp
 systemctl enable reflector.timer
-systemctl enable acpid
 
 echo "Updating sudo" 
 pacman --noconfirm --sync sudo
