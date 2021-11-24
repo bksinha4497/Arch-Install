@@ -22,10 +22,10 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd  openssh git wget ufw vim ntfs-3g terminus-font reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio bash-completion acpi acpi_call tlp cockpit cockpit-machines qemu qemu-arch-extra ovmf dnsmasq vim grub efibootmgr acpid
+pacman -S --noconfirm btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
 
 # Insall Nvidia Drivers
-# pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+# pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics 
 # pacman -S optimus-manager
