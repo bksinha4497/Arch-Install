@@ -39,7 +39,7 @@ Operation=Install
 Operation=Upgrade
 Operation=Remove
 Type=Package
-Target=nvidia
+Target=nvidia-dkms
 Target=linux-zen
 # Change the linux-zen part above and in the Exec line if a different kernel is used
 # Make sure the Target package set in this hook is the one you've installed in steps above (e.g. nvidia, nvidia-dkms, nvidia-lts or nvidia-ck-something).
