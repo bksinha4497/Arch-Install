@@ -1,8 +1,5 @@
 #! /bin/bash
 
-echo "Updaing mirrorlist"
-reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
-
 echo "Chrooted into Arch and Settin up base system"
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
 hwclock --systohc 
@@ -64,6 +61,9 @@ echo "Adding user \"biswajit\" with default root and user password as password"
 useradd -G wheel,power,audio,video,libvirt -d /home/biswajit -m biswajit
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
+
+echo "Updaing mirrorlist"
+reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
 sleep 1s
 echo "Exiting out of chroot"
