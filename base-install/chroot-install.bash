@@ -61,8 +61,7 @@ echo "Updating sudo"
 pacman --noconfirm --sync sudo
 
 echo "Adding user \"biswajit\" with default root and user password as password"
-useradd biswajit
-usermod -aG wheel,power,audio,video,libvirt biswajit
+useradd -G wheel,power,audio,video,libvirt -d /home/biswajit -m biswajit
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
 
