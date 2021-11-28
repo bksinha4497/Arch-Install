@@ -2,14 +2,14 @@
 
 gnome_install() {
   echo "Installing Gnome"
-  sudo pacman -Sy --noconfirm xorg gdm gnome gnome-extra gnome-tweaks firefox vlc
+  sudo pacman -Sy --noconfirm xorg xorg-server gdm gnome gnome-extra gnome-tweaks vlc
   sudo systemctl enable gdm
   echo "Installation complete , you can reboot now"
 }
 
 kde_install() {
   echo "Installing KDE"
-  sudo pacman -Sy --noconfirm xorg sddm plasma kde-applications firefox vlc
+  sudo pacman -Sy --noconfirm xorg xorg-server sddm plasma kde-applications vlc
   sudo systemctl enable sddm
   echo "Installation compelte , you can reboot now"
 }
