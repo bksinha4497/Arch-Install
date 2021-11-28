@@ -67,9 +67,6 @@ mount -t btrfs -o subvol=@cache,$o_btrfs LABEL=system /mnt/var/cache
 mount -t btrfs -o subvol=@log,$o_btrfs LABEL=system /mnt/var/log 
 mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp 
 
-echo "Mounted volumes on /mnt"
-mount | grep /mnt
-
 sleep 3s
 
 echo "Mounted volumes on /mnt"
