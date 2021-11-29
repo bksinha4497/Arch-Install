@@ -22,7 +22,7 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm intel-ucode linux-zen linux-zen-headers linux-firmware reflector btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
+pacman -S --noconfirm intel-ucode linux-zen linux-zen-headers linux-firmware grub-btrfs reflector btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
 
 # Insall Nvidia Drivers
 # pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
