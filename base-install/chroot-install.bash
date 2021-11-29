@@ -53,6 +53,7 @@ systemctl enable sshd
 systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
+systemctl enable grub-btrfs.path
 
 echo "Updating sudo" 
 pacman --noconfirm --sync sudo
