@@ -65,6 +65,9 @@ echo biswajit:password | chpasswd
 echo "Updaing mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
+echo "Adding Nvidia Hook"
+cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
+
 sleep 1s
 echo "Exiting out of chroot"
 sleep 1s
