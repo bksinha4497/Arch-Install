@@ -44,6 +44,7 @@ btrfs subvolume create /mnt/@srv
 btrfs subvolume create /mnt/@cache
 btrfs subvolume create /mnt/@log
 btrfs subvolume create /mnt/@tmp
+btrfs subvolume create /mnt/@snapshots
 
 umount -R /mnt
 
@@ -55,6 +56,7 @@ mkdir /mnt/var
 mkdir /mnt/var/cache
 mkdir /mnt/var/log
 mkdir /mnt/var/tmp
+mkdir /mnt/.snapshots
 
 echo "Mounting BTRFS subvolumes"
 o=defaults,x-mount.mkdir
@@ -65,7 +67,8 @@ mount -t btrfs -o subvol=@root,$o_btrfs LABEL=system /mnt/root
 mount -t btrfs -o subvol=@srv,$o_btrfs LABEL=system /mnt/srv 
 mount -t btrfs -o subvol=@cache,$o_btrfs LABEL=system /mnt/var/cache 
 mount -t btrfs -o subvol=@log,$o_btrfs LABEL=system /mnt/var/log 
-mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp 
+mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp
+mount -t btrfs -o subvol=@snapshots,$o_btrfs LABEL=system /mnt/.snapshots
 
 sleep 3s
 
