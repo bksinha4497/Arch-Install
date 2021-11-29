@@ -22,7 +22,7 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm intel-ucode  xf86-video-intel linux-zen linux-zen-headers linux-firmware reflector btrfs-progs snapper snap-pac grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
+pacman -S --noconfirm intel-ucode  xf86-video-intel linux-zen linux-zen-headers linux-firmware reflector btrfs-progs snapper snap-pac grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
 
 # Insall Nvidia Drivers
 echo "Installing nvdia drivers"
@@ -30,7 +30,7 @@ pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
 echo "Installing optimus manager for hybrid graphics"
-pacman -S optimus-manager optimus-manager-qt
+pacman -S optimus-manager optimus-manager-qt bbswitch-dkms
 
 echo "Generating initramfs"
 mkinitcpio -P 
@@ -62,7 +62,7 @@ echo "Updating sudo"
 pacman --noconfirm --sync sudo
 
 echo "Adding user \"biswajit\" with default root and user password as password"
-useradd -G wheel,power,audio,video,libvirt -d /home/biswajit -m biswajit
+useradd -G wheel,power,audio,video,libvirt,kvm,cups -d /home/biswajit -m biswajit
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
 
