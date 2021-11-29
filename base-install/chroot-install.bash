@@ -22,13 +22,15 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -S --noconfirm intel-ucode  xf86-video-intel linux-zen linux-zen-headers linux-firmware grub-btrfs reflector btrfs-progs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
+pacman -S --noconfirm intel-ucode  xf86-video-intel linux-zen linux-zen-headers linux-firmware reflector btrfs-progs snapper snap-pac grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pulseaudio virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim grub efibootmgr
 
 # Insall Nvidia Drivers
-# pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+echo "Installing nvdia drivers"
+pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
-# Install Optimus for hybrid graphics 
-# pacman -S optimus-manager
+# Install Optimus for hybrid graphics
+echo "Installing optimus manager for hybrid graphics"
+pacman -S optimus-manager optimus-manager-qt
 
 echo "Generating initramfs"
 mkinitcpio -P 
@@ -54,6 +56,7 @@ systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
+systemctl enable optimus-manager
 
 echo "Updating sudo" 
 pacman --noconfirm --sync sudo
@@ -68,6 +71,9 @@ reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
 echo "Adding Nvidia Hook"
 cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
+
+echo "Creating snapper config"
+snapper -c root create-config /
 
 sleep 1s
 echo "Exiting out of chroot"
