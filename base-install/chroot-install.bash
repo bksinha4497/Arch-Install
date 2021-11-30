@@ -21,16 +21,22 @@ echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
 echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
+echo "Installing paru"
+cd ~
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+
 echo "Installing lot of softwares"
-pacman -S --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub grub-hook efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
+paru -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub grub-hook efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
 
 # Insall Nvidia Drivers
 echo "Installing nvdia drivers"
-pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+paru -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
 echo "Installing optimus manager for hybrid graphics"
-pacman -S optimus-manager optimus-manager-qt bbswitch-dkms
+paru -S optimus-manager optimus-manager-qt bbswitch-dkms
 
 echo "Generating initramfs"
 mkinitcpio -P 
