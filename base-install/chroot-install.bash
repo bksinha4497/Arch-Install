@@ -21,14 +21,16 @@ echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
 echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
+echo "Installing wget"
+pacman -Sy --noconfirm wget
+
 echo "Installing paru"
-cd ~
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
+wget https://github.com/Morganamilo/paru/releases/download/v1.9.0/paru-v1.9.0-x86_64.tar.zst
+pacman -U --noconfirm paru*.zst
+rm -rf paru*
 
 echo "Installing lot of softwares"
-paru -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub grub-hook efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git wget ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
+paru -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub grub-hook efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
 
 # Insall Nvidia Drivers
 echo "Installing nvdia drivers"
