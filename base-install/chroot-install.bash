@@ -45,13 +45,8 @@ mkdir /boot/efi
 mount LABEL=EFI /boot/efi
 
 echo "Installing Grub"
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot/efi/EFI --bootloader-id=grub --recheck
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot/efi --bootloader-id=grub --removable
 grub-mkconfig -o /boot/grub/grub.cfg
-
-echo "Setting up grub boot loader to run startup.nsh file correctly during boot"
-mkdir /boot/efi/EFI/BOOT
-cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.efi
-#echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
 
 echo "Enabelling services to start on boot"
 systemctl enable NetworkManager 
