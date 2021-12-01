@@ -30,7 +30,6 @@ pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
 echo "Installing optimus manager for hybrid graphics"
-cd ~
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/optimus-manager.tar.gz
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/optimus-manager-qt.tar.gz
 wget https://aur.archlinux.org/cgit/aur.git/snapshot/bbswitch-dkms-git.tar.gz
