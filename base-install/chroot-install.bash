@@ -80,7 +80,7 @@ reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 #echo "Adding optimus manager configuration"
 #cp /Arch-Install/optimus-manager.conf /etc/optimus-manager/
 
-echo "Adding gub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
+echo "Adding grub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
 cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
 
 echo "Creating snapper config"
