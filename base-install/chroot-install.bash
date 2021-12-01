@@ -21,24 +21,16 @@ echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
 echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
-echo "Installing wget"
-pacman -Sy --noconfirm wget
-
-echo "Installing paru"
-wget https://github.com/Morganamilo/paru/releases/download/v1.9.0/paru-v1.9.0-x86_64.tar.zst
-pacman -U --noconfirm paru*.zst
-rm -rf paru*
-
 echo "Installing lot of softwares"
-paru -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub grub-hook efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
+pacman -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack pulseeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
 
 # Insall Nvidia Drivers
 echo "Installing nvdia drivers"
-paru -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
 echo "Installing optimus manager for hybrid graphics"
-paru -S optimus-manager optimus-manager-qt bbswitch-dkms
+pacman -S optimus-manager optimus-manager-qt bbswitch-dkms
 
 echo "Generating initramfs"
 mkinitcpio -P 
@@ -82,6 +74,9 @@ cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
 
 echo "Adding optimus manager configuration"
 cp /Arch-Install/optimus-manager.conf /etc/optimus-manager/
+
+echo "Adding gub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
+cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
 
 echo "Creating snapper config"
 snapper -c root create-config /
