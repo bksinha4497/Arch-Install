@@ -45,7 +45,7 @@ mkdir /boot/efi
 mount LABEL=EFI /boot/efi
 
 echo "Installing Grub"
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable --boot-directory=/boot/efi/EFI --bootloader-id=grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot/efi/EFI --bootloader-id=grub --recheck
 grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
 
 echo "Setting up grub boot loader to run startup.nsh file correctly during boot"
