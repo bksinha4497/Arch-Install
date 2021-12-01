@@ -49,8 +49,8 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable --boot-di
 grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
 
 echo "Setting up grub boot loader to run startup.nsh file correctly during boot"
-mkdir /boot/efi/EFI/BOOT
-cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
+mkdir /boot/efi/EFI/boot
+cp /boot/efi/EFI/GRUB/grubx64.efi //boot/efi/EFI/boot/bootx64.efi
 #echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
 
 echo "Enabelling services to start on boot"
