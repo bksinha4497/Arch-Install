@@ -25,17 +25,17 @@ echo "Installing lot of softwares"
 pacman -Sy --noconfirm intel-ucode xf86-video-intel linux-firmware reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack easyeffects virt-manager libvirt qemu qemu-arch-extra dnsmasq neovim
 
 # Insall Nvidia Drivers
-echo "Installing nvdia drivers"
-pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+e#cho "Installing nvdia drivers"
+#pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
-echo "Installing optimus manager for hybrid graphics"
-pacman-key --init
-pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-pacman-key --lsign-key 3056513887B78AEB
-pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-echo "[chaotic-aur]" >> /etc/pacman.conf && echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
-pacman -Sy optimus-manager optimus-manager-qt bbswitch-dkms-git
+#echo "Installing optimus manager for hybrid graphics"
+#pacman-key --init
+#pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+#pacman-key --lsign-key 3056513887B78AEB
+#pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+#echo "[chaotic-aur]" >> /etc/pacman.conf && echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+#pacman -Sy optimus-manager optimus-manager-qt bbswitch-dkms-git
 
 echo "Generating initramfs"
 mkinitcpio -P 
@@ -51,7 +51,7 @@ grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
 echo "Setting up grub boot loader to run startup.nsh file correctly during boot"
 mkdir /boot/efi/EFI/BOOT
 cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
-echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
+#echo "bcf boot add 1 fs0:\EFI\GRUB\grubx64.efi "GRUB BOOT LOADER"" >>/boot/efi/startup.nsh
 
 echo "Enabelling services to start on boot"
 systemctl enable NetworkManager 
@@ -61,7 +61,7 @@ systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
-systemctl enable optimus-manager
+#systemctl enable optimus-manager
 
 echo "Updating sudo" 
 pacman --noconfirm --sync sudo
@@ -74,11 +74,11 @@ echo biswajit:password | chpasswd
 echo "Updaing mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
-echo "Adding Nvidia Hook"
-cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
+#echo "Adding Nvidia Hook"
+#cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
 
-echo "Adding optimus manager configuration"
-cp /Arch-Install/optimus-manager.conf /etc/optimus-manager/
+#echo "Adding optimus manager configuration"
+#cp /Arch-Install/optimus-manager.conf /etc/optimus-manager/
 
 echo "Adding gub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
 cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
