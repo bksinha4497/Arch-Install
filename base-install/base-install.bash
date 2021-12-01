@@ -76,7 +76,7 @@ echo "Mounted volumes on /mnt"
 mount | grep /mnt
 
 echo "Installing arch base"
-pacstrap /mnt base base-devel linux-zen linux-zen-headers
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware
 
 echo "Generating fstab"
 genfstab -U /mnt >> /mnt/etc/fstab  
