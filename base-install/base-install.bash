@@ -48,6 +48,14 @@ btrfs subvolume create /mnt/@snapshots
 
 umount -R /mnt
 
+sleep 2
+
+if mount | grep /mnt > /dev/null; then
+    echo "Please unmount /mnt using :: unmount -R /mnt and continue"
+    sleep 5
+fi
+
+
 mkdir /mnt/{boot,home,root,srv,var,var/cache,var/log,var/tmp,.snapshots}
 
 echo "Mounting BTRFS subvolumes"
