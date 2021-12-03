@@ -16,9 +16,6 @@ echo "Wiping drive $DRIVE"
 sgdisk --zap-all $DRIVE
 
 echo "Partitioning drive with partition labels"
-#Wirh swap partition
-#sgdisk --clear --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:efi --new=2:0:+"$swap_size"GiB --typecode=2:8200 --change-name=2:swap --new=3:0:0 --typecode=3:8300 --change-name=3:system $DRIVE
-#Without swap parition
 sgdisk --clear --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:efi --new=2:0:0 --typecode=2:8300 --change-name=2:system $DRIVE
 
 sleep 1s
@@ -26,19 +23,9 @@ sleep 1s
 echo "Formatting EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/efi
 
-#echo "Setting up swap"
-#mkswap -L swap /dev/disk/by-partlabel/swap
-#swapon -L swap
-
 echo "Creating  subvolumes"
 mkfs.btrfs --force --label system /dev/disk/by-partlabel/system
 mount -t btrfs LABEL=system /mnt
-
-if mount | grep /mnt > /dev/null; then
-    echo "/mnt mounted"
-else
-    echo "/mnt is not mounted"
-fi
 
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
