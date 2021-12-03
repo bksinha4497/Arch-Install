@@ -48,13 +48,7 @@ btrfs subvolume create /mnt/@snapshots
 
 umount -R /mnt
 
-sleep 2
-
-if mount | grep /mnt > /dev/null; then
-    echo "Please unmount /mnt using :: unmount -R /mnt and continue"
-    sleep 5
-fi
-
+sleep 1
 
 mkdir /mnt/{boot,home,root,srv,var,var/cache,var/log,var/tmp,.snapshots}
 
@@ -67,11 +61,7 @@ mount -t btrfs -o subvol=@root,$o_btrfs LABEL=system /mnt/root
 mount -t btrfs -o subvol=@srv,$o_btrfs LABEL=system /mnt/srv 
 mount -t btrfs -o subvol=@cache,$o_btrfs LABEL=system /mnt/var/cache 
 mount -t btrfs -o subvol=@log,$o_btrfs LABEL=system /mnt/var/log 
-mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp
-mount -t btrfs -o subvol=@snapshots,$o_btrfs LABEL=system /mnt/.snapshots
-
-echo "Mounted volumes on /mnt"
-mount | grep /mnt
+mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp 
 
 echo "Installing arch base"
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware
@@ -91,5 +81,3 @@ if mount | grep /mnt > /dev/null; then
 else
     echo "You can now reboot the machine"
 fi
-
-#reboot
