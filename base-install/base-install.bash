@@ -26,9 +26,9 @@ sleep 1s
 echo "Formatting EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/efi
 
-echo "Setting up swap"
-mkswap -L swap /dev/disk/by-partlabel/swap
-swapon -L swap
+#echo "Setting up swap"
+#mkswap -L swap /dev/disk/by-partlabel/swap
+#swapon -L swap
 
 echo "Creating  subvolumes"
 mkfs.btrfs --force --label system /dev/disk/by-partlabel/system
