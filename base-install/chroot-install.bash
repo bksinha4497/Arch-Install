@@ -40,8 +40,7 @@ pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snappe
 echo "Generating initramfs"
 mkinitcpio -P 
 
-echo "Making /boot/efi and mounting EFI partition"
-mkdir /boot
+echo "Mounting EFI partition to /boot"
 mount LABEL=EFI /boot
 
 echo "Installing Grub"
