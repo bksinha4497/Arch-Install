@@ -35,6 +35,7 @@ echo "Generating initramfs"
 mkinitcpio -P 
 
 echo "Creating directory /boot/efi and Mounting EFI partition to /boot/efi"
+mkdir /boot/efi
 mount LABEL=EFI /boot/efi
 
 echo "Installing Grub"
