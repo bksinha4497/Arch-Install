@@ -8,4 +8,4 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Description = Updating grub configuration ...
 When = PostTransaction
-Exec = /usr/bin/grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg
+Exec = /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg && cp /boot/efi/EFI/GRUB/grubx64.efi /boot/efi/EFI/BOOT/BOOTx64.EFI
