@@ -35,10 +35,11 @@ echo "Generating initramfs"
 mkinitcpio -P 
 
 echo "Mounting EFI partition to /boot"
-mount LABEL=EFI /boot
+mkdir /boot/efi
+mount LABEL=EFI /boot/efi
 
 echo "Installing Grub"
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Enabelling services to start on boot"
