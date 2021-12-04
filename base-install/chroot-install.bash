@@ -73,7 +73,7 @@ echo biswajit:password | chpasswd
 
 echo "Updating fish as default shell"
 chsh -s /usr/bin/fish
-chsh -s /usr/bin/fish bksinha4497
+chsh -s /usr/bin/fish biswajit
 
 echo "Updaing mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
