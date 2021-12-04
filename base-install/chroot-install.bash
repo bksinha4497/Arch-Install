@@ -70,6 +70,10 @@ useradd -G wheel,power,audio,video,libvirt,kvm,cups -d /home/biswajit -m biswaji
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
 
+echo "Updating fish as default shell"
+chsh -s /usr/bin/fish
+chsh -s /usr/bin/fish bksinha4497
+
 echo "Updaing mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
@@ -84,7 +88,6 @@ cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
 
 echo "Creating snapper config"
 snapper -c root create-config /
-
 
 sleep 1s
 echo "Exiting out of chroot"
