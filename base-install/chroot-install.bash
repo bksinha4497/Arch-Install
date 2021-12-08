@@ -22,7 +22,7 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack easyeffects virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq neovim fish neofetch
+pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack easyeffects virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq neovim fish neofetch cups cups-pdf
 
 # Insall Nvidia Drivers
 #echo "Installing nvdia drivers"
@@ -50,6 +50,7 @@ systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
+systemctl enable cups
 #systemctl enable optimus-manager
 
 echo "Updating sudo" 
