@@ -42,15 +42,6 @@ echo "Installing Grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Installing and Configuring Zram"
-touch /etc/modules-load.d/zram.conf
-echo "zram" >> /etc/modules-load.d/zram.conf
-touch /etc/modprobe.d/zram.conf
-echo "options zram num_devices=1" >> /etc/modprobe.d/zram.conf
-touch /etc/udev/rules.d/99-zram.rules
-echo "KERNEL=="zram0", ATTR{disksize}="512M",TAG+="systemd"" >> /etc/udev/rules.d/99-zram.rules
-cp /Arch-Install/zram.service /etc/systemd/system/
-
 echo "Enabelling services to start on boot"
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
