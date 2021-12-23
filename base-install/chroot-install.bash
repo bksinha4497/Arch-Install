@@ -51,7 +51,6 @@ systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
 systemctl enable cups
-systemctl enable zram
 #systemctl enable optimus-manager
 
 echo "Updating sudo" 
