@@ -28,9 +28,6 @@ pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snappe
 #echo "Installing nvdia drivers"
 #pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
-# Install Optimus for hybrid graphics
-#pacman -Sy optimus-manager optimus-manager-qt
-
 echo "Generating initramfs"
 mkinitcpio -P 
 
@@ -70,9 +67,6 @@ reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
 #echo "Adding Nvidia Hook"
 #cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
-
-#echo "Adding optimus manager configuration"
-#cp /Arch-Install/optimus-manager.conf /etc/optimus-manager/
 
 echo "Adding grub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
 cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
