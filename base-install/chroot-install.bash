@@ -26,7 +26,7 @@ pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snappe
 
 # Insall Nvidia Drivers
 #echo "Installing nvdia drivers"
-#pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+#pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings nvidia-prime
 
 echo "Generating initramfs"
 mkinitcpio -P 
