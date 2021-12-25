@@ -29,7 +29,7 @@ pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snappe
 #pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
 
 # Install Optimus for hybrid graphics
-#pacman -Sy optimus-manager optimus-manager-qt bbswitch-dkms-git
+#pacman -Sy optimus-manager optimus-manager-qt
 
 echo "Generating initramfs"
 mkinitcpio -P 
