@@ -22,7 +22,7 @@ echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
 echo "Installing lot of softwares"
-pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g exfat-utils reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils cups cups-pdf hplip alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq neovim fish neofetch ghostscript libreoffice-fresh vlc mpv
+pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g exfat-utils reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq vim neofetch ghostscript libreoffice-fresh vlc zsh
 
 # Insall Nvidia Drivers
 #echo "Installing nvdia drivers"
@@ -47,7 +47,6 @@ systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
-systemctl enable cups
 #systemctl enable optimus-manager
 
 echo "Updating sudo" 
@@ -58,9 +57,9 @@ useradd -G wheel,power,audio,video,storage,libvirt,kvm,cups -d /home/biswajit -m
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
 
-echo "Updating fish as default shell"
-chsh -s /usr/bin/fish
-chsh -s /usr/bin/fish biswajit
+echo "Updating zsh as default shell"
+chsh -s /usr/bin/zsh
+chsh -s /usr/bin/zsh biswajit
 
 echo "Updaing mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
