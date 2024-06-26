@@ -83,14 +83,19 @@ packages=(
 )
 pacman -Sy --noconfirm "${packages[@]}"
 
-# Optionally install Nvidia Drivers (uncomment if needed)
-#echo "Installing Nvidia drivers"
-#pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings nvidia-prime
+# Determine the primary drive
+DRIVE=$(lsblk -dno NAME,TYPE | grep disk | head -n 1 | awk '{print "/dev/" $1}')
 
-echo "Generating initramfs"
-mkinitcpio -P 
+# Determine the correct disk label for GRUB installation
+if [ -L /dev/disk/by-partlabel/system ]; then
+    # If the label exists, use it
+    DISK_LABEL=$(readlink -f /dev/disk/by-partlabel/system | sed 's/.*\///')
+else
+    # Otherwise, default to the first partition on the primary drive
+    DISK_LABEL=$(ls /dev/disk/by-partlabel/ | head -n 1)
+fi
 
-# Determine if system is EFI or BIOS
+# Install GRUB based on EFI or BIOS system
 if [ -d "/sys/firmware/efi" ]; then
     echo "Detected EFI system"
 
@@ -104,7 +109,7 @@ else
     echo "Detected BIOS system"
 
     echo "Installing Grub for BIOS"
-    grub-install --target=i386-pc /dev/sdX  # Replace /dev/sdX with your disk
+    sed -i "s|grub-install --target=i386-pc /dev/sdX|grub-install --target=i386-pc /dev/$DRIVE|" "$0"
 fi
 
 # Generate GRUB configuration
