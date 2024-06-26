@@ -1,6 +1,15 @@
 #! /bin/bash
 
-echo "Chrooted into Arch and Settin up base system"
+# Function to handle errors
+handle_error() {
+    echo "Error on line $1"
+    exit 1
+}
+
+# Trap errors
+trap 'handle_error $LINENO' ERR
+
+echo "Chrooted into Arch and Setting up base system"
 ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime  
 hwclock --systohc 
 
@@ -13,19 +22,21 @@ echo "Adding persistent keymap"
 echo "KEYMAP=us" > /etc/vconsole.conf
 
 echo "Setting hosts and hostname"
-echo "arch" >> /etc/hostname 
-echo "127.0.0.1	localhost" >>etc/hosts
-echo "::1	localhost" >>etc/hosts
-echo "127.0.1.1	arch.localdomain arch" >>etc/hosts
+echo "arch" > /etc/hostname 
+cat <<EOF > /etc/hosts
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   arch.localdomain arch
+EOF
 
 echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
-echo "Installing lot of softwares"
+echo "Installing lot of software"
 pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g exfat-utils reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq vim neofetch ghostscript libreoffice-fresh vlc zsh
 
-# Insall Nvidia Drivers
-#echo "Installing nvdia drivers"
+# Install Nvidia Drivers (uncomment if needed)
+#echo "Installing nvidia drivers"
 #pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings nvidia-prime
 
 echo "Generating initramfs"
@@ -39,7 +50,7 @@ echo "Installing Grub"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Enabelling services to start on boot"
+echo "Enabling services to start on boot"
 systemctl enable NetworkManager 
 systemctl enable dhcpcd
 systemctl enable sshd
@@ -61,13 +72,13 @@ echo "Updating zsh as default shell"
 chsh -s /usr/bin/zsh
 chsh -s /usr/bin/zsh biswajit
 
-echo "Updaing mirrorlist"
+echo "Updating mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
 #echo "Adding Nvidia Hook"
 #cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
 
-echo "Adding grub hook - run grub0-mkconfig when new linux kernel is insralled or updated or removed"
+echo "Adding grub hook - run grub-mkconfig when new linux kernel is installed or updated or removed"
 cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
 
 echo "Creating snapper config"
@@ -77,3 +88,4 @@ sleep 1s
 echo "Exiting out of chroot"
 sleep 1s
 exit
+

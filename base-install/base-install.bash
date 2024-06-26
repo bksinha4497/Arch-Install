@@ -1,14 +1,16 @@
 #!/bin/bash
 
-if [[ $(lsblk -d -o name) =~ "nvme" ]]
-then
- DRIVE=/dev/nvme0n1
-elif [[ $(lsblk -d -o name) =~ "sda" ]]
-then
- DRIVE=/dev/sda
-else
- DRIVE=/dev/vda
-fi
+# Function to handle errors
+handle_error() {
+    echo "Error on line $1"
+    exit 1
+}
+
+# Trap errors
+trap 'handle_error $LINENO' ERR
+
+# Detect the primary drive
+DRIVE=$(lsblk -dno NAME,TYPE | grep disk | head -n 1 | awk '{print "/dev/" $1}')
 
 swap_size="1"
 
@@ -23,7 +25,7 @@ sleep 1s
 echo "Formatting EFI partition"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/efi
 
-echo "Creating  subvolumes"
+echo "Creating subvolumes"
 mkfs.btrfs --force --label system /dev/disk/by-partlabel/system
 mount -t btrfs LABEL=system /mnt
 
@@ -40,7 +42,7 @@ umount -R /mnt
 
 sleep 1
 
-mkdir /mnt/{boot,home,root,srv,var,var/cache,var/log,var/tmp,.snapshots}
+mkdir -p /mnt/{boot,home,root,srv,var,var/cache,var/log,var/tmp,.snapshots}
 
 echo "Mounting BTRFS subvolumes"
 o=defaults,x-mount.mkdir
@@ -68,7 +70,8 @@ arch-chroot /mnt ./Arch-Install/base-install/chroot-install.bash
 umount -R /mnt
 
 if mount | grep /mnt > /dev/null; then
-    echo "Please unmount /mnt using :: unmount -R /mnt and reboot"
+    echo "Please unmount /mnt using :: umount -R /mnt and reboot"
 else
     echo "You can now reboot the machine"
 fi
+
