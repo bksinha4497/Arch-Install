@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 # Function to handle errors
 handle_error() {
@@ -29,90 +29,25 @@ cat <<EOF > /etc/hosts
 127.0.1.1   arch.localdomain arch
 EOF
 
-echo "Setting default root password"
+echo "Setting default root passwd as password"
 echo root:password | chpasswd
 
-echo "Installing a lot of software"
-# List of packages installed, shortened for brevity
-packages=(
-    "intel-ucode"
-    "xf86-video-intel"
-    "reflector"
-    "btrfs-progs"
-    "snapper"
-    "snap-pac"
-    "grub"
-    "efibootmgr"
-    "grub-btrfs"
-    "bridge-utils"
-    "wpa_supplicant"
-    "wireless_tools"
-    "networkmanager"
-    "nm-connection-editor"
-    "network-manager-applet"
-    "dhcpcd"
-    "openssh"
-    "wget"
-    "git"
-    "ntfs-3g"
-    "exfat-utils"
-    "reflector"
-    "rsync"
-    "nfs-utils"
-    "inetutils"
-    "dnsutils"
-    "bluez"
-    "bluez-utils"
-    "alsa-utils"
-    "pipewire"
-    "gst-plugin-pipewire"
-    "pipewire-pulse"
-    "pipewire-alsa"
-    "pipewire-jack"
-    "virt-manager"
-    "libvirt"
-    "qemu"
-    "ovmf"
-    "dnsmasq"
-    "vim"
-    "neofetch"
-    "ghostscript"
-    "libreoffice-fresh"
-    "vlc"
-    "zsh"
-)
-pacman -Sy --noconfirm "${packages[@]}"
+echo "Installing lot of software"
+pacman -Sy --noconfirm intel-ucode xf86-video-intel reflector btrfs-progs snapper snap-pac grub efibootmgr grub-btrfs bridge-utils wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet dhcpcd openssh wget git ntfs-3g exfat-utils reflector rsync nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pipewire gst-plugin-pipewire pipewire-pulse pipewire-alsa pipewire-jack virt-manager libvirt qemu qemu-arch-extra ovmf dnsmasq vim neofetch ghostscript libreoffice-fresh vlc zsh
 
-# Determine the primary drive
-DRIVE=$(lsblk -dno NAME,TYPE | grep disk | head -n 1 | awk '{print "/dev/" $1}')
+# Install Nvidia Drivers (uncomment if needed)
+#echo "Installing nvidia drivers"
+#pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings nvidia-prime
 
-# Determine the correct disk label for GRUB installation
-if [ -L /dev/disk/by-partlabel/system ]; then
-    # If the label exists, use it
-    DISK_LABEL=$(readlink -f /dev/disk/by-partlabel/system | sed 's/.*\///')
-else
-    # Otherwise, default to the first partition on the primary drive
-    DISK_LABEL=$(ls /dev/disk/by-partlabel/ | head -n 1)
-fi
+echo "Generating initramfs"
+mkinitcpio -P 
 
-# Install GRUB based on EFI or BIOS system
-if [ -d "/sys/firmware/efi" ]; then
-    echo "Detected EFI system"
+echo "Creating directory /boot/efi and Mounting EFI partition to /boot/efi"
+mkdir /boot/efi
+mount LABEL=EFI /boot/efi
 
-    echo "Creating directory /boot/efi and Mounting EFI partition to /boot/efi"
-    mkdir -p /boot/efi
-    mount LABEL=EFI /boot/efi
-
-    echo "Installing Grub for EFI"
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
-else
-    echo "Detected BIOS system"
-
-    echo "Installing Grub for BIOS"
-    sed -i "s|grub-install --target=i386-pc /dev/sdX|grub-install --target=i386-pc /dev/$DRIVE|" "$0"
-fi
-
-# Generate GRUB configuration
+echo "Installing Grub"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Enabling services to start on boot"
@@ -123,13 +58,13 @@ systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
 systemctl enable grub-btrfs.path
-# systemctl enable optimus-manager (if needed)
+#systemctl enable optimus-manager
 
 echo "Updating sudo" 
 pacman --noconfirm --sync sudo
 
 echo "Adding user \"biswajit\" with default root and user password as password"
-useradd -G wheel,power,audio,video,storage,libvirt,kvm,cups -m biswajit
+useradd -G wheel,power,audio,video,storage,libvirt,kvm,cups -d /home/biswajit -m biswajit
 sed -i '0,/# %wheel/s// %wheel/' /etc/sudoers
 echo biswajit:password | chpasswd
 
@@ -140,16 +75,16 @@ chsh -s /usr/bin/zsh biswajit
 echo "Updating mirrorlist"
 reflector -c "India" -f 5 > /etc/pacman.d/mirrorlist
 
-# Example of copying hooks
-# echo "Adding Nvidia Hook"
-# cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
+#echo "Adding Nvidia Hook"
+#cp /Arch-Install/nvidia.hook /etc/pacman.d/hooks/
 
-echo "Adding grub hook - run grub-mkconfig when new Linux kernel is installed or updated or removed"
+echo "Adding grub hook - run grub-mkconfig when new linux kernel is installed or updated or removed"
 cp /Arch-Install/grub.hook /usr/share/libalpm/hooks/
 
 echo "Creating snapper config"
 snapper -c root create-config /
 
-echo "Exiting chroot environment"
+sleep 1s
+echo "Exiting out of chroot"
 sleep 1s
 exit
