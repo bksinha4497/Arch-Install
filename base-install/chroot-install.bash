@@ -50,6 +50,7 @@ pacman -Sy --noconfirm \
     grub \
     efibootmgr \
     grub-btrfs \
+    inotify-tools \
     bridge-utils \
     wpa_supplicant \
     wireless_tools \
@@ -113,7 +114,7 @@ systemctl enable sshd
 systemctl enable bluetooth
 systemctl enable libvirtd
 systemctl enable reflector.timer
-systemctl enable grub-btrfs.path
+systemctl enable grub-btrfsd.service
 # systemctl enable optimus-manager (uncomment if needed)
 
 # Update sudoers
