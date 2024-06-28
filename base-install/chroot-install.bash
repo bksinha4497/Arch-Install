@@ -123,7 +123,7 @@ pacman --noconfirm --sync sudo
 
 # Add a user and set permissions
 echo "Adding user 'biswajit' and setting permissions"
-useradd -G wheel,power,audio,video,storage,libvirt,kvm,cups -m biswajit
+useradd -G wheel,power,audio,video,storage,libvirt,kvm -m biswajit
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 echo "biswajit:password" | chpasswd
 
