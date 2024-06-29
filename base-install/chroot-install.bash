@@ -82,7 +82,7 @@ pacman -Sy --noconfirm \
     ovmf \
     dnsmasq \
     vim \
-    neofetch \
+    fastfetch \
     ghostscript \
     libreoffice-fresh \
     vlc \
